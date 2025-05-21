@@ -1,0 +1,61 @@
+
+# ==========================================
+#     WINDOWS PROCESS & SYSTEM COMMANDS
+#       For Educational Use Only
+# ==========================================
+
+# === PROCESS TERMINATION ===
+
+# Kill a process by PID
+taskkill /PID <pid> /F
+
+# Kill processes by name
+taskkill /IM notepad.exe /F
+taskkill /IM chrome.exe /F
+
+# View running processes
+tasklist
+
+# === SYSTEM SHUTDOWN & REBOOT ===
+
+shutdown /s /t 0         # Shutdown immediately
+shutdown /r /t 0         # Reboot immediately
+shutdown /l              # Log off current user
+shutdown /a              # Abort shutdown
+
+# === DESTRUCTIVE COMMANDS (DANGEROUS) ===
+
+# Delete all files on drive C (VERY DANGEROUS)
+del /F /S /Q C:\*        # Force delete all files in C drive (usually requires Admin)
+
+# Format a drive (requires confirmation)
+format C: /fs:NTFS        # Formats drive C (system crash if confirmed)
+
+# Delete critical system files
+del C:\Windows\System32\* /F /S /Q
+
+# Remove boot files (unbootable system)
+bcdedit /deletevalue {current} safeboot
+
+# Disable system by corrupting registry (VERY DANGEROUS)
+reg delete HKLM\SYSTEM /f
+
+# === MEMORY/RESOURCE ATTACKS ===
+
+# Infinite fork bomb using PowerShell (crashes system)
+:loop start powershell -WindowStyle Hidden -Command ":loop start powershell -WindowStyle Hidden -Command ':loop ...'"
+
+# Memory-hogging loop
+powershell -Command "while($true){[void]([System.Collections.ArrayList]::new())}"
+
+# === NETWORK DISRUPTION ===
+
+# Disable network interface
+netsh interface set interface "Wi-Fi" admin=disable
+
+# Flush DNS cache
+ipconfig /flushdns
+
+# === NOTE ===
+# These commands are for educational purposes only.
+# Do not run them on a production or important machine.
